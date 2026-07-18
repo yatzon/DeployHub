@@ -9,7 +9,7 @@ DeployHub turns your existing deploy scripts into a fast, colour-coded control c
 
 *Single file. Zero dependencies. MIT licensed. Works on any Linux server you already own.*
 
-```
+```text
 =================================================
             DeployHub  ·  your whole server
 =================================================
@@ -39,26 +39,26 @@ already have. DeployHub is the missing cockpit for the classic
 **one-VPS, several-apps** setup — the reality for most side projects, agencies,
 indie SaaS, and internal tools.
 
-| Without DeployHub | With DeployHub |
-| --- | --- |
-| `cd` into the right folder, hope you remember the build steps | Pick a number. It runs the right script. |
-| "Did I `rm -rf .next` before building this one?" | The `[clean]` badge tells you before you deploy. |
-| `pm2 logs`, `pm2 restart`, `nano .env` — three commands, three paths | All one keypress away, per service. |
-| New teammate has no idea how anything deploys | The menu *is* the documentation. |
-| Deploy logic drifts from a wiki page nobody updates | Your script is the only source of truth. |
+| Without DeployHub                                                    | With DeployHub                                   |
+| -------------------------------------------------------------------- | ------------------------------------------------ |
+| `cd` into the right folder, hope you remember the build steps        | Pick a number. It runs the right script.         |
+| "Did I `rm -rf .next` before building this one?"                     | The `[clean]` badge tells you before you deploy. |
+| `pm2 logs`, `pm2 restart`, `nano .env` — three commands, three paths | All one keypress away, per service.              |
+| New teammate has no idea how anything deploys                        | The menu *is* the documentation.                 |
+| Deploy logic drifts from a wiki page nobody updates                  | Your script is the only source of truth.         |
 
 ---
 
 ## Features
 
-- 🎛️ **One menu for every app** — Node, Next.js, static SPAs, Go binaries, anything with a shell script.
-- 🔎 **Reads your scripts, doesn't replace them** — it greps `APP_DIR`, `DEST_DIR`, and the pm2 app/action straight out of each script. No new config format to learn, nothing to keep in sync.
-- 🏷️ **At-a-glance badges** — `[clean]` `[npm-ci]` `[go]` `[dist]` `[reload]` `[local-pkg]` … see exactly what a deploy will do *before* you run it.
-- 🟢 **Live process status** — online / down for every pm2-managed service, right in the list.
-- ⚡ **Per-service actions** — deploy, quick zero-downtime reload, edit `.env`, edit `ecosystem.config.js`, tail logs, live logs, drop into the project shell, restart/stop/start.
-- ➕ **Self-completing** — got an app but no deploy script yet? DeployHub scaffolds a starter for you, opens it in your editor, and the app promotes itself to "deployable" the moment you save.
-- 🌐 **Server-wide tools** — `pm2 save/resurrect`, `nginx -t && reload`, disk & memory, open ports — in the global menu.
-- 📦 **Single file, no dependencies** — one bash script. Copy it to your server and run it. That's the install.
+* 🎛️ **One menu for every app** — Node, Next.js, static SPAs, Go binaries, anything with a shell script.
+* 🔎 **Reads your scripts, doesn't replace them** — it greps `APP_DIR`, `DEST_DIR`, and the pm2 app/action straight out of each script. No new config format to learn, nothing to keep in sync.
+* 🏷️ **At-a-glance badges** — `[clean]` `[npm-ci]` `[go]` `[dist]` `[reload]` `[local-pkg]` … see exactly what a deploy will do *before* you run it.
+* 🟢 **Live process status** — online / down for every pm2-managed service, right in the list.
+* ⚡ **Per-service actions** — deploy, quick zero-downtime reload, edit `.env`, edit `ecosystem.config.js`, tail logs, live logs, drop into the project shell, restart/stop/start.
+* ➕ **Self-completing** — got an app but no deploy script yet? DeployHub scaffolds a starter for you, opens it in your editor, and the app promotes itself to "deployable" the moment you save.
+* 🌐 **Server-wide tools** — `pm2 save/resurrect`, `nginx -t && reload`, disk & memory, open ports — in the global menu.
+* 📦 **Single file, no dependencies** — one bash script. Copy it to your server and run it. That's the install.
 
 ---
 
@@ -91,13 +91,13 @@ zero vendor lock-in.
 
 ```bash
 # 1. Grab the one file
-curl -fsSLO https://raw.githubusercontent.com/YOURNAME/deployhub/main/deployhub.sh
+curl -fsSLO https://raw.githubusercontent.com/yatzon/DeployHub/main/deployhub.sh
 chmod +x deployhub.sh
 
 # 2. Point it at a scripts folder (default: ~/deploy-scripts)
 mkdir -p ~/deploy-scripts
 
-# 3. Drop in a deploy script (see examples/ for copy-paste starters)
+# 3. Drop in a deploy script (see examples/scripts/ for copy-paste starters)
 cat > ~/deploy-scripts/api.example.com.sh <<'EOF'
 #!/bin/bash
 set -e
@@ -142,10 +142,10 @@ layer on top of it — never a replacement, never a second config to babysit.
 
 **On the server:**
 
-- **bash 4+** — standard on every modern Linux. (macOS ships 3.2; `brew install bash` if you want it there.)
-- **git** — used by typical deploy scripts (`git pull`).
-- **[PM2](https://pm2.keymetrics.io/)** *(recommended)* — powers the live status column, log tailing, and restart/reload actions. `npm install -g pm2`. Apps not under pm2 still deploy fine; they just show `n/a` for status.
-- Whatever **your own scripts** need — Node/npm, the Go toolchain, etc. DeployHub itself needs none of it; it only runs your scripts.
+* **bash 4+** — standard on every modern Linux. (macOS ships 3.2; `brew install bash` if you want it there.)
+* **git** — used by typical deploy scripts (`git pull`).
+* **[PM2](https://pm2.keymetrics.io/)** *(recommended)* — powers the live status column, log tailing, and restart/reload actions. `npm install -g pm2`. Apps not under pm2 still deploy fine; they just show `n/a` for status.
+* Whatever **your own scripts** need — Node/npm, the Go toolchain, etc. DeployHub itself needs none of it; it only runs your scripts.
 
 **Optional (used by the global menu):** `nginx`, and `ss` or `netstat`.
 
@@ -158,14 +158,14 @@ DeployHub has **no runtime dependencies of its own** beyond bash and coreutils.
 **Option A — clone the repo**
 
 ```bash
-git clone https://github.com/YOURNAME/deployhub.git
-cd deployhub && chmod +x deployhub.sh && ./deployhub.sh
+git clone https://github.com/yatzon/DeployHub.git
+cd DeployHub && chmod +x deployhub.sh && ./deployhub.sh
 ```
 
 **Option B — one file, no repo**
 
 ```bash
-curl -fsSLO https://raw.githubusercontent.com/YOURNAME/deployhub/main/deployhub.sh
+curl -fsSLO https://raw.githubusercontent.com/yatzon/DeployHub/main/deployhub.sh
 chmod +x deployhub.sh && ./deployhub.sh
 ```
 
@@ -182,9 +182,9 @@ SCRIPTS_DIR="${DEPLOYHUB_SCRIPTS_DIR:-$HOME/deploy-scripts}"
 EDITOR="${EDITOR:-nano}"
 ```
 
-- **`SCRIPTS_DIR`** — where your deploy scripts live. Override per run:
+* **`SCRIPTS_DIR`** — where your deploy scripts live. Override per run:
   `DEPLOYHUB_SCRIPTS_DIR=/srv/deploy-scripts ./deployhub.sh`
-- **`EDITOR`** — editor for the edit-`.env` / edit-script actions.
+* **`EDITOR`** — editor for the edit-`.env` / edit-script actions.
 
 That's the entire configuration. Everything else is read from your scripts.
 
@@ -195,8 +195,8 @@ That's the entire configuration. Everything else is read from your scripts.
 A DeployHub-friendly script is just a normal deploy script that declares one or
 two variables so the menu can read them:
 
-- **`APP_DIR=`** — the project directory *(required)*.
-- **`DEST_DIR=`** — the publish target for static sites *(optional)*.
+* **`APP_DIR=`** — the project directory *(required)*.
+* **`DEST_DIR=`** — the publish target for static sites *(optional)*.
 
 Plus, for pm2-managed apps, a `pm2 reload NAME --update-env` (or `restart`)
 line, which DeployHub reads to drive status and quick actions.
